@@ -299,8 +299,8 @@ This work is currently available as a preprint and has not undergone peer review
 
 # License
 
-This repository is released under the **CC BY-NC-ND 4.0**. (Creative Commons Attribution-NonCommercial-NoDerivs)
-See the `LICENSE` file for full terms and conditions.
+This repository is released under the **MIT License**.  
+See the `LICENSE` file for the full terms and conditions.
 
 ---
 
