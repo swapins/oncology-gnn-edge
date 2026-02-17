@@ -1,0 +1,8 @@
+torch==1.12.0
+torch-geometric==2.0.4
+torch-scatter
+torch-sparse
+numpy
+scipy
+scikit-learn
+networkx
