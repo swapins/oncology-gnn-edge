@@ -1,42 +1,70 @@
-import torch
 import time
-import numpy as np
-from models.gnn_model import OncologyGNN
 
-def run_protocol(mode="systems_validation"):
-    """
-    Implements the dual-category protocol:
-    1. Systems Validation: Stress test for hardware feasibility.
-    2. Biological Baseline: Assessment using unmodified TCGA data.
-    """
-    # Optimized for NVIDIA Jetson Nano (4GB LPDDR4)
-    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    print(f"--- Protocol: {mode.upper()} | Device: {device} ---")
+# Import core gnn_edge modules first (torch-dependent) before PyQt5
+from gnn_edge.config import GNNConfig
+from gnn_edge.inference import GNNInference
+from gnn_edge.data.synthetic_ppi import generate_synthetic_ppi
+from gnn_edge.logger import setup_logger, log_system_info
 
-    # Paper Specs: PPI Network (1,603 genes / 2,757 edges)
-    num_nodes = 1603
-    num_edges = 2757
-    in_dim = 1603 # Feature dimensionality
+# Import PyQt5 after torch is loaded
+from PyQt5.QtWidgets import QApplication
+from PyQt5.QtCore import QTimer
+from gnn_edge.ui.dashboard import GNNSystemDashboard
 
-    model = OncologyGNN(in_channels=in_dim, hidden_channels=64).to(device)
-    model.eval()
 
-    # Create dummy tensors representing the TCGA/STRING graph structure
-    x = torch.randn(num_nodes, in_dim).to(device)
-    edge_index = torch.randint(0, num_nodes, (2, num_edges)).to(device)
-    batch = torch.zeros(num_nodes, dtype=torch.long).to(device)
+def run_application():
 
-    # Benchmark Inference Latency
-    latencies = []
-    for _ in range(10):
-        start_time = time.time()
-        with torch.no_grad():
-            _ = model(x, edge_index, batch)
-        latencies.append((time.time() - start_time) * 1000)
+    logger = setup_logger()
+    log_system_info(logger)
 
-    avg_latency = np.mean(latencies)
-    print(f"Average Inference Latency: {avg_latency:.2f} ms")
-    print(f"Paper Target Latency: 15 ms")
+    config = GNNConfig(
+        input_dim=64,
+        hidden_dim=32,
+        use_fp16=True
+    )
+
+    engine = GNNInference(config)
+
+    logger.info(f"Using device: {engine.device}")
+    logger.info(f"FP16 enabled: {engine.use_fp16}")
+
+    app = QApplication([])
+    dashboard = GNNSystemDashboard(engine)
+    dashboard.show()
+
+    def run_inference():
+
+        graph = generate_synthetic_ppi(
+            200,
+            64,
+            sparse=True,
+            device=engine.device
+        )
+
+        start = time.time()
+        output = engine.forward(graph)
+        end = time.time()
+
+        inference_time = (end - start) * 1000
+
+        logger.info(
+            f"Inference completed | "
+            f"Nodes={graph['adjacency'].size(0)} | "
+            f"Time={inference_time:.2f} ms"
+        )
+
+        dashboard.update_inference_info(
+            graph,
+            output,
+            inference_time
+        )
+
+    timer = QTimer()
+    timer.timeout.connect(run_inference)
+    timer.start(2000)
+
+    app.exec_()
+
 
 if __name__ == "__main__":
-    run_protocol(mode="systems_validation")
+    run_application()

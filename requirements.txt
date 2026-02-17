@@ -1,4 +1,4 @@
-torch==1.12.0
+torch>=2.0.0
 torch-geometric==2.0.4
 torch-scatter
 torch-sparse
@@ -6,3 +6,8 @@ numpy
 scipy
 scikit-learn
 networkx
+pytest
+PyQt5>=5.15.0
+PyQtChart>=5.15.0
+psutil>=5.9.0
+pandas>=1.3.0

@@ -1,0 +1,1 @@
+from .synthetic_ppi import generate_synthetic_ppi
