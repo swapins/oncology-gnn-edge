@@ -338,3 +338,10 @@ Focus Areas:
 - Numerical stability in deep learning
 
 
+# Patent Notice
+
+Certain architectural concepts referenced in this repository are related to intellectual property associated with the PeachBot Bio platform, including issued patents and/or published or pending patent applications.
+
+This repository is released under the MIT License. The MIT License applies solely to the code contained herein and does not grant rights to practice or commercialize any separate patented systems beyond the scope of this specific implementation.
+
+For inquiries related to intellectual property beyond this repository’s open-source scope, please contact the project maintainer.
