@@ -17,21 +17,43 @@ This framework emphasizes:
 
 ## Research Context
 
-Biological systems are inherently network-driven. Protein interaction networks encode structural dependencies that are not captured by isolated gene expression analysis.
+Biological systems are inherently network-driven. Protein–protein interaction (PPI) networks encode structural dependencies that are not captured by isolated gene expression analysis.
+
+Graph-based modeling provides a principled framework for integrating molecular state with topological context, enabling structured representation learning across biological interaction networks.
 
 This project explores:
 
 > Efficient, numerically stable execution of normalized Graph Convolutional Networks for molecular network representation learning under constrained compute environments.
 
+To support interdisciplinary understanding, the theoretical and biological foundations of this system are documented in:
+
+- [`docs/Mathematical_Basis.md`](docs/Mathematical_Basis.md) — Spectral graph theory, normalization mechanics, sparse computation, and stability analysis.
+- [`docs/Biological_Basis.md`](docs/Biological_Basis.md) — Protein interaction networks, molecular feature representation, pathway-level modeling, and systems biology context.
+
+These documents are designed to bridge:
+
+- Mathematics  
+- Computer Science  
+- Systems Engineering  
+- Molecular Biology  
+
+---
+
+## Intended Use
+
 The system is intended for:
 
-* Translational oncology research
-* Computational biology prototyping
-* Network-level molecular representation studies
-* Edge-deployable biological modeling
+- Translational oncology research  
+- Computational biology prototyping  
+- Network-level molecular representation studies  
+- Edge-deployable biological modeling  
 
-**Important:**
-This framework is a research prototype. It is **not a clinical decision system** and is not validated for diagnostic, prognostic, or therapeutic use.
+---
+
+⚠️ **Important**
+
+This framework is a research prototype.  
+It is **not a clinical decision system** and is not validated for diagnostic, prognostic, or therapeutic use.
 
 ---
 
