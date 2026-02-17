@@ -74,7 +74,7 @@ With:
 * Controlled spectral properties
 * Deterministic inference behavior
 
-This design prioritizes numerical stability in biological graph workloads.
+This design prioritizes numerical stability in biological graph workloads. specifically designed to prevent eigenvalue explosion during the recursive message-passing phase—a common failure point when deploying GNNs on 16-bit floating-point (FP16) Edge hardware.
 
 ---
 
@@ -91,7 +91,7 @@ The system:
   * Desktop GPUs
   * Embedded NVIDIA Jetson platforms
 
-This reflects an **edge-first systems architecture philosophy**.
+This reflects a deterministic systems architecture philosophy. Unlike standard GNN implementations that rely on massive VRAM, this framework prioritizes cache-line optimization and sparse memory access patterns to stay within the thermal and power envelopes of embedded devices. **edge-first systems architecture philosophy**
 
 ---
 
@@ -299,7 +299,7 @@ This work is currently available as a preprint and has not undergone peer review
 
 # License
 
-This repository is released under the **MIT License**.
+This repository is released under the **CC BY-NC-ND 4.0**. (Creative Commons Attribution-NonCommercial-NoDerivs)
 See the `LICENSE` file for full terms and conditions.
 
 ---
@@ -363,7 +363,7 @@ Synthetic graph generation utilities are included to ensure reproducible benchma
 
 # Author
 Swapin Vidya
-Edge Systems Developer – Bioinformatics & AI Infrastructure
+Edge Systems Research – Bioinformatics & AI Infrastructure
 Focus Areas:
 - Edge AI architecture
 - Graph neural networks
