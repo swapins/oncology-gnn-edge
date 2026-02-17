@@ -50,10 +50,11 @@ The system is intended for:
 
 ---
 
-⚠️ **Important**
+**Important**
 
 This framework is a research prototype.  
 It is **not a clinical decision system** and is not validated for diagnostic, prognostic, or therapeutic use.
+
 
 ---
 
@@ -63,9 +64,7 @@ It is **not a clinical decision system** and is not validated for diagnostic, pr
 
 Implements symmetric normalization:
 
-\[
-H^{(l+1)} = \sigma\left(D^{-1/2}(A+I)D^{-1/2}H^{(l)}W^{(l)}\right)
-\]
+$$H^{(l+1)} = \sigma(D^{-1/2} (A + I) D^{-1/2} H^{(l)} W^{(l)})$$
 
 With:
 
@@ -127,7 +126,7 @@ Optimized for:
 
 ---
 
-# 📊 Input and Output Specification
+# Input and Output Specification
 
 ## Input
 
@@ -182,7 +181,7 @@ Embeddings are exportable to CSV for downstream analysis in:
 
 ---
 
-# 🏗 Architecture Overview
+# Architecture Overview
 
 ```
 Expression Data → Feature Tensor
@@ -361,7 +360,6 @@ All core inference functionality is:
 - Fully test-covered via unit tests
 
 Synthetic graph generation utilities are included to ensure reproducible benchmarking without external data dependencies.
-
 
 # Author
 Swapin Vidya
